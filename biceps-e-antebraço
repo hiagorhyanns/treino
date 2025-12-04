@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bíceps e Ombro</title>
+
+  <!-- RESPONSIVO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/jpg" href="https://img.freepik.com/vetores-premium/bodybuilder-flexionando-os-musculos-do-braco-silhueta-em-fundo-branco_1266257-29645.jpg?semt=ais_hybrid&w=740&q=80"/>
+  <link rel="shortcut icon" href="https://img.freepik.com/vetores-premium/bodybuilder-flexionando-os-musculos-do-braco-silhueta-em-fundo-branco_1266257-29645.jpg?semt=ais_hybrid&w=740&q=80" type="image/jpg"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+    body {
+      font-family:"Montserrat", sans-serif;
+      background:#000;
+      color:#fff;
+    }
+
+    .app {
+      width:100%;
+      min-height:100vh;
+      background:#000;
+      overflow:hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position:relative;
+      height:320px;
+    }
+    .hero img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(1.1) contrast(1.05);
+    }
+    .hero-overlay {
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.65)60%,#000);
+    }
+
+    .back-button {
+      cursor:pointer;
+      position:absolute;
+      top:18px;
+      left:16px;
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:none;
+      border:none;
+    }
+    .back-button::before {
+      content:"";
+      width:14px;
+      height:14px;
+      border-left:3px solid #fff;
+      border-bottom:3px solid #fff;
+      transform:rotate(45deg);
+    }
+
+    .hero-title {
+      position:absolute;
+      bottom:68px;
+      left:24px;
+      font-size:32px;
+      font-weight:900;
+      color:#fff;
+      text-shadow:0 3px 12px rgba(0,0,0,1);
+    }
+    .obs-title {
+      position:absolute;
+      bottom:10px;
+      left:24px;
+      font-size:14px;
+      color:#fff;
+      text-shadow:0 3px 12px rgba(0,0,0,1);
+    }
+
+    /* CONTEÚDO */
+    .content {
+      padding:18px 16px 30px;
+    }
+
+    .exercise-card {
+      position: relative;
+      display:flex;
+      flex-direction:column;
+      background:#171717;
+      border-radius:5px;
+      padding:10px;
+      gap:10px;
+      margin-bottom:14px;
+      transition:0.25s;
+    }
+
+    .exercise-main {
+      display:flex;
+      align-items:stretch;
+      gap:12px;
+    }
+
+    /* BOTÃO CHECK */
+    .check-btn {
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:22px;
+      height:22px;
+      border-radius:6px;
+      border:1px solid #ffffffaa;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:3;
+      transition:0.25s;
+      font-size:14px;
+      color:#026C47;
+    }
+    .check-btn::before {content:"";}
+
+    /* BOTÃO IMAGEM (SETA PRA BAIXO) */
+    .image-toggle {
+      position:absolute;
+      top:10px;
+      right:42px; /* fica antes do check */
+      width:22px;
+      height:22px;
+      border-radius:6px;
+      border:0px solid #ffffffaa;
+      background:#40442d;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:3;
+      transition:0.25s;
+    }
+    .image-toggle::before {
+      content:"💪";   /* seta pra baixo */
+      font-size:16px;
+      line-height:1;
+      color:#fff;
+    }
+    .image-toggle.open::before {
+      content:"×";   /* vira X quando aberto */
+      font-size:18px;
+    }
+
+    /* CARD CONCLUÍDO */
+    .exercise-card.done {
+      background: #026C47 !important;
+      box-shadow: 0 0 10px #026c47aa;
+    }
+    .exercise-card.done .check-btn {
+      background:#fff;
+      border-color:#fff;
+      box-shadow: inset 0 0 0 3px #026C47;
+    }
+    .exercise-card.done .check-btn::before {
+      content:"✓";
+    }
+
+    .exercise-thumb {
+      position:relative;
+      width:78px;
+      height:78px;
+      border-radius:3px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .exercise-thumb a {
+      display:block;
+      width:100%;
+      height:100%;
+    }
+
+    .exercise-thumb video {
+      cursor: pointer;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    /* BOTÃO DE EXPANDIR VÍDEO */
+    .expand-btn {
+      position:absolute;
+      top:2px;
+      left:2px;
+      width:22px;
+      height:22px;
+      border-radius:2px;
+      border:0px solid #ffffffaa;
+      background:rgba(0,0,0,0.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:2;
+    }
+    .expand-btn::before {
+      content:"⤢";
+      font-size:13px;
+      line-height:1;
+      color:#fff;
+    }
+
+    .exercise-info {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      color:#fff;
+    }
+
+    .tag-chip {
+      font-size:12px;
+      color:#c29aff;
+      opacity:.85;
+    }
+
+    .exercise-title {
+      font-size:15px;
+      font-weight:700;
+      margin-top:3px;
+    }
+
+    .exercise-meta {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:6px;
+    }
+
+    .meta-item {
+      display:flex;
+      align-items:center;
+      font-size:11px;
+      color:#fff;
+    }
+
+    .meta-icon {
+      display: none;
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:9px;
+    }
+    .meta-icon.series::before {content:"↻";}
+    .meta-icon.reps::before {content:"↻";}
+
+    .meta-icon.weight::before {display:none;}
+
+    .weight-box {
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+    .weight-value {
+      border:1px solid #a754ff;
+      background:#201d32;
+      padding:4px 8px;
+      border-radius:6px;
+      font-size:12px;
+      min-width:24px;
+      text-align:center;
+      color:#fff;
+    }
+    .weight-unit {
+      font-size:11px;
+      color:#fff;
+      opacity:0.8;
+    }
+
+    /* PREVIEW DE IMAGEM ACIMA DO CARD */
+    .exercise-img-preview {
+      display:none;
+      border-radius:10px;
+      overflow:hidden;
+      background:#000;
+    }
+    .exercise-img-preview.open {
+      display:block;
+    }
+    .exercise-img-preview img {
+      width:100%;
+      height:auto;
+      display:block;
+      cursor:pointer;
+    }
+
+    /* MODAL DE VÍDEO */
+    .video-modal {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .video-modal.open {
+      display:flex;
+    }
+    .video-modal-inner {
+      position:relative;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+    }
+    .video-modal-inner video {
+      max-width:100%;
+      max-height:100%;
+      border-radius:10px;
+      background:#000;
+    }
+    .close-video {
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:none;
+      background:rgba(0,0,0,0.7);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* MODAL DE IMAGEM */
+    .image-modal {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.85);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+    }
+    .image-modal.open {
+      display:flex;
+    }
+    .image-modal-inner {
+      position:relative;
+      width:100%;
+      max-width:414px;   /* mesma largura do app */
+      padding:12px;
+    }
+    .image-modal-inner img {
+      width:100%;
+      height:auto;       /* altura NÃO fixa */
+      display:block;
+      border-radius:10px;
+      background:#000;
+    }
+    .close-image {
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:none;
+      background:rgba(0,0,0,0.7);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:2;
+    }
+
+    /* DESKTOP: mock de celular */
+    @media (min-width: 768px) {
+      body {
+        background:#fff;
+        display:flex;
+        justify-content:center;
+        padding:16px 0;
+      }
+      .app {
+        max-width:414px;
+        border-radius:12px;
+        box-shadow:0 0 30px rgba(0,0,0,0.7);
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="app">
+
+  <section class="hero">
+    <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80">
+    <div class="hero-overlay"></div>
+    <!-- <button class="back-button"></button> -->
+
+    <div class="hero-title">Bíceps & Antebraço</div>
+    <div class="obs-title">
+      <p><span style="font-weight: 800;"> Segunda </span> e <span style="font-weight: 800;"> Quinta </span> (2x vezes por semana)</p>
+      <p><span style="font-weight: 800;"> 72h </span> entre treinos (Treine até a falha sempre)</p>
+      <p style="font-size: 10px;">Suba em 1 seg e desça em 2 a 3 seg (1 min e 30s de descanso entre série)</p>
+    </div>
+  </section>
+
+  <section class="content">
+
+    <!-- CARD 1 -->
+    <div class="exercise-card" style="display:none;">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <!--<button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>-->
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/biceps-stretch-variation-one">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-biceps-stretch-variation-1-front.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Bíceps</div>
+          <div class="exercise-title">Alongamento de Ativação</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>30 segundos (cada braço)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGEM QUE APARECE ACIMA DO CARD AO CLICAR NA SETA -->
+      <!-- 
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+       -->
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/machine-seated-plate-loaded-preacher-curl">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-plate-loaded-preacher-curl-side.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Bíceps (Cabeça Curta)</div>
+          <div class="exercise-title">Máquina de Rosca Scott</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+        <img src="https://www.efdeportes.com/efd212/a-rosca-scott-01.jpg">
+        <img src="https://treinomestre.com.br/wp-content/uploads/2023/11/rosca-scott-na-polia.gif">
+        <a href="https://www.youtube.com/shorts/xovBAVM0bq0" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> Como fazer rosca scott
+        </a>
+        <a href="https://www.youtube.com/shorts/2LjTJuKGrps" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> Melhor exercício para bíceps! Rosca scott máquina!
+        </a>
+        <a href="https://www.youtube.com/shorts/WH6IgVJeK68" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> NUNCA MAIS ERRE NA ROSCA SCOTT 
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dumbbell-incline-curl">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-incline-curl-side.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Bíceps (Cabeça Longa)</div>
+          <div class="exercise-title">Rosca inclinada halteres</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dumbbell-hammer-curl">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-hammer-curl-side.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Braquial</div>
+          <div class="exercise-title">Rosca martelo halteres</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+        <video class="x1lliihq x5yr21d xh8yej3 dl-injected" playsinline="" preload="none" src="blob:https://www.instagram.com/55b71129-8aae-4f47-a46e-d95e06c99def" style="display: block;"></video>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/chin-ups">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-bodyweight-chinup-side.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Bíceps</div>
+          <div class="exercise-title">Barra Fixa Supinada</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="exercise-card" style="display:none;">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-biceps-stretch-variation-3-side.mp4"></video>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Bíceps</div>
+          <div class="exercise-title">Alongamento de Recuperação</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>30 segundos (cada braço)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+      -->
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="exercise-card" style="display:none;">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-forearms-stretch-variation-3-side.mp4"></video>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Antebraço</div>
+          <div class="exercise-title">Alongamento de Ativação</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>30 segundos (cada braço)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    -->
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dead-hang">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Bodyweight-dead-hang-front.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Antebraço</div>
+          <div class="exercise-title">Pendurado Inerte</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>Até falhar
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">30</div>
+              <span class="weight-unit">seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dumbbell-wrist-curl">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Recovery-wrist-flexor-curl-dumbbell-kneeling-front.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Antebraço</div>
+          <div class="exercise-title">Flexão Punho Haltere Banco</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dumbbell-wrist-extension">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Dumbbells-dumbbell-wrist-extension-side.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Antebraço</div>
+          <div class="exercise-title">Extensão Punho Haltere Banco</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    </div>
+
+    <!-- CARD 11 -->
+    <div class="exercise-card" style="display:none;">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href=""></a>
+          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-forearms-stretch-variation-4-side.mp4"></video>
+        </div>
+        <div class="exercise-info">
+          <div class="tag-chip">Antebraço</div>
+          <div class="exercise-title">Alongamento de Recuperação</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <span class="meta-icon series"></span>4x séries (até falhar)
+            </div>
+            <div class="weight-box">
+              <span class="meta-icon weight"></span>
+              <div class="weight-value">8</div>
+              <span class="weight-unit">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- 
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    -->
+    </div>
+
+  </section>
+</div>
+
+<!-- MODAL DE VÍDEO -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-inner">
+    <button class="close-video" id="closeVideo">&times;</button>
+    <video id="modalVideo" controls playsinline></video>
+  </div>
+</div>
+
+<!-- MODAL DE IMAGEM -->
+<div class="image-modal" id="imageModal">
+  <div class="image-modal-inner">
+    <button class="close-image" id="closeImage">&times;</button>
+    <img id="modalImage" alt="Imagem ampliada do exercício">
+  </div>
+</div>
+
+<script>
+  // CHECK (somente no botão)
+  const checkButtons = document.querySelectorAll(".check-btn");
+  checkButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = btn.closest(".exercise-card");
+      card.classList.toggle("done");
+    });
+  });
+
+  // TOGGLE IMAGEM (seta pra baixo / X)
+  const imageToggles = document.querySelectorAll(".image-toggle");
+  imageToggles.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = btn.closest(".exercise-card");
+      const preview = card.querySelector(".exercise-img-preview");
+      if (!preview) return;
+
+      const opened = preview.classList.toggle("open");
+      btn.classList.toggle("open", opened);
+    });
+  });
+
+  // MODAL DE IMAGEM
+  const imageModal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const closeImageBtn = document.getElementById("closeImage");
+
+  document.querySelectorAll(".exercise-img-preview img").forEach(img => {
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const src = img.getAttribute("src");
+      modalImage.setAttribute("src", src);
+      imageModal.classList.add("open");
+    });
+  });
+
+  function closeImageModal() {
+    imageModal.classList.remove("open");
+    modalImage.removeAttribute("src");
+  }
+
+  closeImageBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeImageModal();
+  });
+
+  imageModal.addEventListener("click", (e) => {
+    if (e.target === imageModal) {
+      closeImageModal();
+    }
+  });
+
+  // EXPANDIR VÍDEO (mantido)
+  const expandButtons = document.querySelectorAll(".expand-btn");
+  const videoModal = document.getElementById("videoModal");
+  const modalVideo = document.getElementById("modalVideo");
+  const closeVideoBtn = document.getElementById("closeVideo");
+
+  function closeModalVideo() {
+    videoModal.classList.remove("open");
+    if (!modalVideo.paused) modalVideo.pause();
+    modalVideo.removeAttribute("src");
+    modalVideo.load();
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  expandButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const card = btn.closest(".exercise-card");
+      const thumbVideo = card.querySelector(".exercise-thumb video");
+      if (!thumbVideo) return;
+
+      const src = thumbVideo.currentSrc || thumbVideo.getAttribute("src");
+      modalVideo.setAttribute("src", src);
+      videoModal.classList.add("open");
+
+      modalVideo.play().catch(() => {});
+
+      if (modalVideo.requestFullscreen) {
+        modalVideo.requestFullscreen().catch(() => {});
+      }
+    });
+  });
+
+  closeVideoBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeModalVideo();
+  });
+
+  videoModal.addEventListener("click", (e) => {
+    if (e.target === videoModal) {
+      closeModalVideo();
+    }
+  });
+</script>
+
+</body>
+</html>
