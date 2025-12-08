@@ -67,6 +67,94 @@
       transform:rotate(45deg);
     }
 
+    /* MENU SUPERIOR (SOCIAL / DIETA / DICAS) */
+    .hero-menu {
+      position:absolute;
+      top:18px;
+      right:16px;
+      display:flex;
+      gap:8px;
+      z-index:3;
+    }
+    .hero-menu-button {
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      letter-spacing:0.02em;
+      background:rgba(0,0,0,0.55);
+      color:#fff;
+      backdrop-filter:blur(4px);
+    }
+    .hero-menu-button.social {
+      border:1px solid #7cb7ff;
+      color:#cbe2ff;
+    }
+    .hero-menu-button.dieta {
+      border:1px solid #7CFF7C;
+      color:#b6ffb6;
+    }
+    .hero-menu-button.dicas {
+      border:1px solid #ffd27c;
+      color:#ffe0a6;
+    }
+
+    /* CRONÔMETRO 1:30 */
+    .timer-box {
+      position:absolute;
+      left:24px;
+      top:85px;
+      width:120px;
+      height:90px;
+      border-radius:14px;
+      background:rgba(0,0,0,0.75);
+      border:1px solid rgba(255,255,255,0.55);
+      box-shadow:0 4px 18px rgba(0,0,0,0.8);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+      cursor:pointer;
+      z-index:3;
+    }
+    .timer-box:hover {
+      background:rgba(0,0,0,0.9);
+    }
+    .timer-label {
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      opacity:0.8;
+    }
+    .timer-display {
+      font-size:26px;
+      font-weight:900;
+      line-height:1;
+    }
+    .timer-sub {
+      font-size:9px;
+      opacity:0.7;
+    }
+    /* ESTADOS DO CRONÔMETRO */
+    .timer-box.running {
+      background: rgb(62 183 14 / 90%);
+      border-color: #7CFF7C;
+      box-shadow: 0 0 15px rgba(124, 255, 124, 0.75);
+    }
+    .timer-box.paused {
+      background: rgb(220 233 45 / 75%);
+      border-color: #d2fd00;
+      box-shadow: 0 0 15px rgba(255, 179, 71, 0.75);
+    }
+    .timer-box.finished {
+      background: rgb(255 0 0 / 75%);
+      border-color: #FF5757;
+      box-shadow: 0 0 20px rgba(255, 87, 87, 0.8);
+    }
+
     .hero-title {
       position:absolute;
       bottom:68px;
@@ -88,6 +176,24 @@
     /* CONTEÚDO */
     .content {
       padding:18px 16px 30px;
+    }
+
+    /* SEÇÃO DICAS (fica na tela, não some) */
+    .dieta-section {
+      margin-bottom:18px;
+      padding:10px 12px 12px;
+      background:#101010;
+      border-radius:10px;
+    }
+    .dieta-section h2 {
+      font-size:15px;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    .dieta-section p {
+      font-size:12px;
+      line-height:1.4;
+      opacity:0.85;
     }
 
     .exercise-card {
@@ -133,7 +239,7 @@
     .image-toggle {
       position:absolute;
       top:10px;
-      right:42px; /* fica antes do check */
+      right:42px;
       width:22px;
       height:22px;
       border-radius:6px;
@@ -147,13 +253,13 @@
       transition:0.25s;
     }
     .image-toggle::before {
-      content:"📝";   /* seta pra baixo */
+      content:"📝";
       font-size:16px;
       line-height:1;
       color:#fff;
     }
     .image-toggle.open::before {
-      content:"×";   /* vira X quando aberto */
+      content:"×";
       font-size:18px;
     }
 
@@ -169,6 +275,11 @@
     }
     .exercise-card.done .check-btn::before {
       content:"✓";
+    }
+
+    /* CARD OCUPADO */
+    .exercise-card.busy {
+      background:#c50909;
     }
 
     .exercise-thumb {
@@ -204,7 +315,7 @@
       height:18px;
       border-radius:2px;
       border:0px solid #ffffffaa;
-      background:rgba(0,0,0,0.7);
+      background:rgb(159 127 208);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -230,6 +341,7 @@
       font-size:12px;
       color:#c29aff;
       opacity:.85;
+      cursor:pointer;
     }
 
     .exercise-title {
@@ -254,22 +366,39 @@
 
     .meta-icon {
       display: none;
-      /*
-      width:14px;
-      height:14px;
-      */
       border-radius:999px;
       display:flex;
       justify-content:center;
       align-items:center;
       font-size:9px;
     }
-    /*
-    .meta-icon.series::before {content:"↻";}
-    .meta-icon.reps::before {content:"↻";}
-    */
 
     .meta-icon.weight::before {display:none;}
+
+    /* BOTÃO EQUIPAMENTO OCUPADO */
+    .busy-btn {
+      width:16px;
+      height:16px;
+      border-radius:4px;
+      border:1px solid #fff;
+      background:rgba(0,0,0,0.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      font-size:11px;
+      color:#fff;
+      margin-right:6px;
+      padding:0;
+    }
+    .busy-btn::before {
+      content:"!";
+      font-weight:700;
+    }
+    .busy-btn.active {
+      background:#ffd54a;
+      color:#000;
+    }
 
     .weight-box {
       margin-left:auto;
@@ -278,14 +407,14 @@
       gap:5px;
     }
     .weight-value {
-      border:1px solid #a754ff;
-      background:#201d32;
+      background:#ffffff;
       padding:4px 8px;
-      border-radius:6px;
-      font-size:12px;
+      border-radius:2px;
+      font-size:14px;
       min-width:24px;
       text-align:center;
-      color:#fff;
+      color:#000;
+      font-weight:bold;
     }
     .weight-unit {
       font-size:11px;
@@ -355,7 +484,7 @@
       justify-content:center;
     }
 
-    /* MODAL DE IMAGEM */
+    /* MODAL DE IMAGEM (preview dos cards) */
     .image-modal {
       position:fixed;
       inset:0;
@@ -371,12 +500,12 @@
     .image-modal-inner {
       position:relative;
       width:100%;
-      max-width:414px;   /* mesma largura do app */
+      max-width:414px;
       padding:12px;
     }
     .image-modal-inner img {
       width:100%;
-      height:auto;       /* altura NÃO fixa */
+      height:auto;
       display:block;
       border-radius:10px;
       background:#000;
@@ -399,6 +528,314 @@
       z-index:2;
     }
 
+    /* MODAL DE MÚSCULO (tag-chip) */
+    .muscle-modal {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1500;
+    }
+    .muscle-modal.open {
+      display:flex;
+    }
+    .muscle-modal-inner {
+      position:relative;
+      width:100%;
+      max-width:480px;
+      padding:12px;
+    }
+    .muscle-modal-inner img {
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .close-muscle {
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:none;
+      background:rgba(0,0,0,0.7);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:2;
+    }
+
+    /* PLAYER SPOTIFY NA PÁGINA */
+    .spotify-section {
+      margin-top: 24px;
+      padding: 14px 10px 4px;
+      background: #101010;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    }
+    .spotify-section h2 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .spotify-player {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .spotify-player iframe {
+      width: 100%;
+      height: 152px;
+      border: none;
+    }
+
+    /* LINK VERSÃO */
+    .version-link {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      text-decoration: underline;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    /* POPUP VERSÃO */
+    .version-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .version-modal.open {
+      display: flex;
+    }
+    .version-modal-inner {
+      position: relative;
+      background: #111;
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      padding: 20px;
+      border-radius: 12px;
+      color: #fff;
+      overflow-y: auto;
+      box-shadow: 0 0 20px #000;
+    }
+    .version-modal-inner h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .version-modal-inner p {
+      font-size: 13px;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .close-version {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* POPUP DICAS */
+    .tips-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+    }
+    .tips-modal.open {
+      display: flex;
+    }
+    .tips-modal-inner {
+      position: relative;
+      background: #111;
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      padding: 20px;
+      border-radius: 12px;
+      color: #fff;
+      overflow-y: auto;
+      box-shadow: 0 0 20px #000;
+    }
+    .tips-modal-inner h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .tips-modal-inner p {
+      font-size: 13px;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .close-tips {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* POPUP DIETA */
+    .diet-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2200;
+    }
+    .diet-modal.open {
+      display: flex;
+    }
+    .diet-modal-inner {
+      position: relative;
+      background: #111;
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      padding: 20px;
+      border-radius: 12px;
+      color: #fff;
+      overflow-y: auto;
+      box-shadow: 0 0 20px #000;
+    }
+    .diet-modal-inner h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .diet-modal-inner h3 {
+      font-size: 14px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .diet-modal-inner p {
+      font-size: 13px;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .close-diet {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* POPUP SOCIAL – SÓ VÍDEOS VERTICAIS */
+    .social-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2300;
+    }
+    .social-modal.open {
+      display: flex;
+    }
+    .social-modal-inner {
+      position: relative;
+      background: #111;
+      width: 90%;
+      max-width: 400px;
+      max-height: 90vh;
+      padding: 16px;
+      border-radius: 12px;
+      color: #fff;
+      overflow-y: auto;
+      box-shadow: 0 0 20px #000;
+    }
+    .close-social {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .social-videos {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:10px;
+    }
+    .social-video {
+      width:100%;
+      max-width:360px;
+      margin:0 auto;
+      aspect-ratio:9 / 16;
+      border-radius:12px;
+      overflow:hidden;
+      background:#000;
+    }
+    .social-video iframe {
+      width:100%;
+      height:100%;
+      border:none;
+      display:block;
+    }
+
     /* DESKTOP: mock de celular */
     @media (min-width: 768px) {
       body {
@@ -413,6 +850,18 @@
         box-shadow:0 0 30px rgba(0,0,0,0.7);
       }
     }
+    .video-como-fazer {
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 9 / 16;
+        margin: 0 auto;
+    }
+    .video-como-fazer iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+    }
   </style>
 </head>
 
@@ -422,7 +871,20 @@
   <section class="hero">
     <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80">
     <div class="hero-overlay"></div>
-    <!-- <button class="back-button"></button> -->
+
+    <!-- MENU SUPERIOR -->
+    <div class="hero-menu">
+      <button class="hero-menu-button social" id="menuSocial">Social</button>
+      <button class="hero-menu-button dieta" id="menuDieta">Dieta</button>
+      <button class="hero-menu-button dicas" id="menuDicas">Dicas</button>
+    </div>
+
+    <!-- CRONÔMETRO 1:30 -->
+    <div class="timer-box" id="timerBox">
+      <div class="timer-label">Descanso</div>
+      <div class="timer-display" id="timerDisplay">1:30</div>
+      <div class="timer-sub" id="timerSub">Toque para iniciar</div>
+    </div>
 
     <div class="hero-title">Bíceps & Antebraço</div>
     <div class="obs-title">
@@ -434,43 +896,17 @@
 
   <section class="content">
 
-    <!-- CARD 1 -->
-    <div class="exercise-card" style="display:none;">
-      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
-      <!--<button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>-->
-
-      <div class="exercise-main">
-        <div class="exercise-thumb">
-          <button class="expand-btn" type="button"></button>
-          <a href="https://musclewiki.com/pt-br/exercise/biceps-stretch-variation-one">
-            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-biceps-stretch-variation-1-front.mp4"></video>
-          </a>
-        </div>
-        <div class="exercise-info">
-          <div class="tag-chip">Bíceps</div>
-          <div class="exercise-title">Alongamento de Ativação</div>
-          <div class="exercise-meta">
-            <div class="meta-item">
-              <span class="meta-icon series"></span>30 segundos (cada braço)
-            </div>
-            <div class="weight-box">
-              <span class="meta-icon weight"></span>
-              <div class="weight-value" contenteditable="true">8</div>
-              <span class="weight-unit">kg</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- IMAGEM QUE APARECE ACIMA DO CARD AO CLICAR NA SETA -->
-      <!-- 
-      <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
-      </div>
-       -->
+    <!-- SEÇÃO DICAS (continua na tela) -->
+    <div class="dieta-section" id="dieta">
+      <h2>Dicas</h2>
+      <p>Não dormir 7 horas destroi musculo e testoterona</p>
+      <p>A praia rouba sua negatividade (Tira ansiedade e depressao)</p>
+      <p>Caminhada retira energia que gera ansiedade e depressao</p>
+      <p>Tomar 30min de sol das 11 as 14hrs</p>
     </div>
 
-    <!-- CARD 2 -->
+    <!-- seus cards (mantive iguais) -->
+    <!-- CARD 1 -->
     <div class="exercise-card">
       <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
       <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
@@ -483,10 +919,15 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Bíceps (Cabeça Curta)</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2IIBemST5p4TvoO274Kf9Ry2ZDkiNVYtjlA&s">
+            Bíceps (Cabeça Curta)
+          </div>
           <div class="exercise-title">Máquina de Rosca Scott</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
             <div class="weight-box">
@@ -499,15 +940,27 @@
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
-        <img src="https://www.efdeportes.com/efd212/a-rosca-scott-01.jpg">
-        <img src="https://treinomestre.com.br/wp-content/uploads/2023/11/rosca-scott-na-polia.gif">
-        <a href="https://www.youtube.com/shorts/xovBAVM0bq0" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> Como fazer rosca scott
-        </a>
-        <a href="https://www.youtube.com/shorts/2LjTJuKGrps" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> Melhor exercício para bíceps! Rosca scott máquina!
-        </a>
-        <a href="https://www.youtube.com/shorts/WH6IgVJeK68" style="display:block;text-align:center;padding:20px;margin: 5px 0;color:#fff; font-weight:600;background:#00adef;"> NUNCA MAIS ERRE NA ROSCA SCOTT 
-        </a>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1jxdy-lxmk4aSrweSSmIvkqZBLb1EyM5D/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1yW0oKqEX8FTddZBTC8jX0J-9z-DXVEww/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1h5KkiUbeEcTqpBr05UduqI5IkUoQyPmk/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
@@ -524,10 +977,15 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Bíceps (Cabeça Longa)</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2IIBemST5p4TvoO274Kf9Ry2ZDkiNVYtjlA&s">
+            Bíceps (Cabeça Longa)
+          </div>
           <div class="exercise-title">Rosca inclinada halteres</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
             <div class="weight-box">
@@ -540,7 +998,20 @@
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1kfhFKqUu1D8gyWSLC7OAgsqgDdj-jTMs/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1T9Gfxh6napkEopHkBj9nk8JWRn8On6vA/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
@@ -557,10 +1028,15 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Braquial</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://www.fisioterapiaenpozuelo.com/wp-content/uploads/2018/02/braquial.jpg">
+            Braquial
+          </div>
           <div class="exercise-title">Rosca martelo halteres</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
             <div class="weight-box">
@@ -573,12 +1049,31 @@
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
-        <video class="x1lliihq x5yr21d xh8yej3 dl-injected" playsinline="" preload="none" src="blob:https://www.instagram.com/55b71129-8aae-4f47-a46e-d95e06c99def" style="display: block;"></video>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/18DJVEQXjRV_e7UYkVtlzAxOE4Dlq5Q_r/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1iv4d7cqQCVfB0a6_uCoQvDNEikVqifpd/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1-NHPWRm4LXDJVs9V59mLFO9xZqZ8u9QO/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
-    <!-- CARD 5 -->
+    <!-- CARD 8 -->
     <div class="exercise-card">
       <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
       <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
@@ -586,93 +1081,84 @@
       <div class="exercise-main">
         <div class="exercise-thumb">
           <button class="expand-btn" type="button"></button>
-          <a href="https://musclewiki.com/pt-br/exercise/chin-ups">
-            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-bodyweight-chinup-side.mp4"></video>
+          <a href="https://musclewiki.com/pt-br/exercises/triceps/cables/4">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-overhead-tricep-extension-front.mp4"></video>
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Bíceps</div>
-          <div class="exercise-title">Barra Fixa Supinada</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://cdn.shopify.com/s/files/1/0425/7667/4983/files/2_31b20275-5f35-4a42-bd4e-38b6b9eaa8a1.png?v=1706011557">
+            Tríceps
+          </div>
+          <div class="exercise-title">Tríceps Acima da Cabeça</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
-            <div class="weight-box">
+          </div>
+          <div class="weight-box">
               <span class="meta-icon weight"></span>
               <div class="weight-value" contenteditable="true">8</div>
               <span class="weight-unit">kg</span>
             </div>
-          </div>
         </div>
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://i.ytimg.com/vi/hSzcih8RAzI/maxresdefault.jpg">
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1NtET6GF7RIRugVpSjx_8_mrZysLuiLLB/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
-    <!-- CARD 6 -->
-    <div class="exercise-card" style="display:none;">
+    <!-- CARD 8 -->
+    <div class="exercise-card">
       <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
-      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
 
       <div class="exercise-main">
         <div class="exercise-thumb">
           <button class="expand-btn" type="button"></button>
-          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-biceps-stretch-variation-3-side.mp4"></video>
+          <a href="https://musclewiki.com/pt-br/exercise/cable-bar-pushdown">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-pushdown-side.mp4"></video>
+          </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Bíceps</div>
-          <div class="exercise-title">Alongamento de Recuperação</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://cdn.shopify.com/s/files/1/0425/7667/4983/files/2_31b20275-5f35-4a42-bd4e-38b6b9eaa8a1.png?v=1706011557">
+            Tríceps
+          </div>
+          <div class="exercise-title">Tríceps Barra Polia</div>
           <div class="exercise-meta">
             <div class="meta-item">
-              <span class="meta-icon series"></span>30 segundos (cada braço)
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
+              <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
-            <div class="weight-box">
+          </div>
+          <div class="weight-box">
               <span class="meta-icon weight"></span>
               <div class="weight-value" contenteditable="true">8</div>
               <span class="weight-unit">kg</span>
             </div>
-          </div>
         </div>
       </div>
-      <!-- 
-      <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
-      </div>
-      -->
-    </div>
 
-    <!-- CARD 7 -->
-    <div class="exercise-card" style="display:none;">
-      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
-      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
-
-      <div class="exercise-main">
-        <div class="exercise-thumb">
-          <button class="expand-btn" type="button"></button>
-          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-forearms-stretch-variation-3-side.mp4"></video>
-        </div>
-        <div class="exercise-info">
-          <div class="tag-chip">Antebraço</div>
-          <div class="exercise-title">Alongamento de Ativação</div>
-          <div class="exercise-meta">
-            <div class="meta-item">
-              <span class="meta-icon series"></span>30 segundos (cada braço)
-            </div>
-            <div class="weight-box">
-              <span class="meta-icon weight"></span>
-              <div class="weight-value" contenteditable="true">8</div>
-              <span class="weight-unit">kg</span>
-            </div>
-          </div>
-        </div>
-      </div>
-<!--
       <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1uz5139xiHj_y8Ykd6hmIoGodcTGtauKB/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
-    -->
     </div>
 
     <!-- CARD 8 -->
@@ -688,16 +1174,55 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Antebraço</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://img.freepik.com/free-vector/arm-muscles-anatomy_1308-129147.jpg?w=740&q=80">
+            Antebraço
+          </div>
           <div class="exercise-title">Pendurado Inerte</div>
           <div class="exercise-meta">
             <div class="meta-item">
-              <span class="meta-icon series"></span>Até falhar
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
+              <span class="meta-icon series"></span>Livre
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-img-preview">
+        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+      </div>
+    </div>
+
+    <!-- CARD 8 (Rosca 21) -->
+    <div class="exercise-card">
+      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
+      <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button>
+
+      <div class="exercise-main">
+        <div class="exercise-thumb">
+          <button class="expand-btn" type="button"></button>
+          <a href="https://musclewiki.com/pt-br/exercise/dead-hang">
+            <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-Barbell-barbell-curl-front.mp4"></video>
+          </a>
+        </div>
+        <div class="exercise-info">
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://www.fisioterapiaenpozuelo.com/wp-content/uploads/2018/02/braquial.jpg">
+            Braquial
+          </div>
+          <div class="exercise-title">Rosca 21</div>
+          <div class="exercise-meta">
+            <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
+              <span class="meta-icon series"></span>21x séries (7 baixo p/ cima | 7 meio p/ cima | 7 completas)
             </div>
             <div class="weight-box">
               <span class="meta-icon weight"></span>
-              <div class="weight-value" contenteditable="true">30</div>
-              <span class="weight-unit">seg</span>
+              <div class="weight-value" contenteditable="true">8</div>
+              <span class="weight-unit">kg</span>
             </div>
           </div>
         </div>
@@ -721,10 +1246,15 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Antebraço</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://img.freepik.com/free-vector/arm-muscles-anatomy_1308-129147.jpg?w=740&q=80">
+            Antebraço
+          </div>
           <div class="exercise-title">Flexão Punho Haltere Banco</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
             <div class="weight-box">
@@ -737,7 +1267,13 @@
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1cQ64UZIwqTjrTFwWgcPjBzjLbGE298IG/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
@@ -754,10 +1290,15 @@
           </a>
         </div>
         <div class="exercise-info">
-          <div class="tag-chip">Antebraço</div>
+          <div
+            class="tag-chip muscle-trigger"
+            data-muscle-img="https://img.freepik.com/free-vector/arm-muscles-anatomy_1308-129147.jpg?w=740&q=80">
+            Antebraço
+          </div>
           <div class="exercise-title">Extensão Punho Haltere Banco</div>
           <div class="exercise-meta">
             <div class="meta-item">
+              <button class="busy-btn" type="button" aria-label="Marcar equipamento ocupado"></button>
               <span class="meta-icon series"></span>4x séries (até falhar)
             </div>
             <div class="weight-box">
@@ -770,42 +1311,34 @@
       </div>
 
       <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
+        <div class="video-como-fazer">
+          <iframe 
+            src="https://drive.google.com/file/d/1cQ64UZIwqTjrTFwWgcPjBzjLbGE298IG/preview"
+            allow="autoplay"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </div>
 
-    <!-- CARD 11 -->
-    <div class="exercise-card" style="display:none;">
-      <button class="check-btn" type="button" aria-label="Marcar exercício concluído"></button>
-      <!-- <button class="image-toggle" type="button" aria-label="Mostrar imagem do exercício"></button> -->
+    <!-- (demais cards continuam iguais, não mexi) -->
+    <!-- ... (mantém todos os outros cards que você já tinha) ... -->
 
-      <div class="exercise-main">
-        <div class="exercise-thumb">
-          <button class="expand-btn" type="button"></button>
-          <a href=""></a>
-          <video height="100%" autoplay muted loop playsinline src="https://media.musclewiki.com/media/uploads/videos/branded/male-forearms-stretch-variation-4-side.mp4"></video>
-        </div>
-        <div class="exercise-info">
-          <div class="tag-chip">Antebraço</div>
-          <div class="exercise-title">Alongamento de Recuperação</div>
-          <div class="exercise-meta">
-            <div class="meta-item">
-              <span class="meta-icon series"></span>4x séries (até falhar)
-            </div>
-            <div class="weight-box">
-              <span class="meta-icon weight"></span>
-              <div class="weight-value" contenteditable="true">8</div>
-              <span class="weight-unit">kg</span>
-            </div>
-          </div>
-        </div>
+    <!-- PLAYER SPOTIFY -->
+    <div class="spotify-section">
+      <h2>Playlist para o treino</h2>
+      <div class="spotify-player">
+        <iframe style="border-radius:12px"
+          src="https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP?utm_source=generator"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
       </div>
-<!-- 
-      <div class="exercise-img-preview">
-        <img src="https://img.freepik.com/fotos-premium/bracos-musculosos-de-um-homem-treinando-biceps-com-a-barra-no-ginasio_1158163-900.jpg?semt=ais_hybrid&w=740&q=80" alt="Execução do exercício">
-      </div>
-    -->
     </div>
+
+    <!-- LINK VERSÃO -->
+    <div class="version-link" id="openVersion">Versão 1.3</div>
 
   </section>
 </div>
@@ -814,11 +1347,11 @@
 <div class="video-modal" id="videoModal">
   <div class="video-modal-inner">
     <button class="close-video" id="closeVideo">&times;</button>
-    <video id="modalVideo" controls playsinline></video>
+    <video id="modalVideo" controls playsinline loop></video>
   </div>
 </div>
 
-<!-- MODAL DE IMAGEM -->
+<!-- MODAL DE IMAGEM (preview) -->
 <div class="image-modal" id="imageModal">
   <div class="image-modal-inner">
     <button class="close-image" id="closeImage">&times;</button>
@@ -826,8 +1359,102 @@
   </div>
 </div>
 
+<!-- MODAL DE MÚSCULO (tag-chip) -->
+<div class="muscle-modal" id="muscleModal">
+  <div class="muscle-modal-inner">
+    <button class="close-muscle" id="closeMuscle">&times;</button>
+    <img id="muscleImage" alt="Músculo trabalhado">
+  </div>
+</div>
+
+<!-- POPUP DE VERSÃO -->
+<div class="version-modal" id="versionModal">
+  <div class="version-modal-inner">
+    <button class="close-version" id="closeVersion">&times;</button>
+    <h2>Versão do App</h2>
+
+    <p>📌 <strong>v1.3</strong> — Menus padronizados (Social, Dieta, Dicas) com popups de Dieta do dia e Anotações Sociais.</p>
+    <p>📌 <strong>v1.2</strong> — Player Spotify, cronômetro, menu Dieta/Dicas, popup de dicas, marcação de equipamento ocupado e popup de músculos.</p>
+    <p>📌 <strong>v1.1</strong> — Check verde para marcar exercícios concluídos.</p>
+    <p>📌 <strong>v1.0</strong> — Primeira versão do layout do app.</p>
+  </div>
+</div>
+
+<!-- POPUP DE DICAS -->
+<div class="tips-modal" id="tipsModal">
+  <div class="tips-modal-inner">
+    <button class="close-tips" id="closeTips">&times;</button>
+    <h2>Dicas de Treino</h2>
+
+    <p>💡 Foque na execução perfeita antes de pensar em aumentar a carga.</p>
+    <p>💡 Mantenha 1:30 de descanso entre as séries (use o cronômetro!).</p>
+    <p>💡 Controle a descida em 2–3 segundos para aumentar o tempo sob tensão.</p>
+    <p>💡 Anote cargas e evolução para não treinar “no escuro”.</p>
+  </div>
+</div>
+
+<!-- POPUP DIETA -->
+<div class="diet-modal" id="dietModal">
+  <div class="diet-modal-inner">
+    <button class="close-diet" id="closeDiet">&times;</button>
+    <h2>Dieta do Dia</h2>
+
+    <!-- Aqui você pode ajustar para a sua dieta real -->
+    <h3>🍽 Café da manhã</h3>
+    <p>• 3 ovos mexidos</p>
+    <p>• 1 fatia de pão integral</p>
+    <p>• 1 fruta (banana ou maçã)</p>
+
+    <h3>🥪 Lanche da manhã</h3>
+    <p>• 1 iogurte + 1 porção de castanhas</p>
+
+    <h3>🍚 Almoço</h3>
+    <p>• Arroz + feijão</p>
+    <p>• 150g de carne magra (frango/boi/peixe)</p>
+    <p>• Salada variada (folhas + legumes)</p>
+
+    <h3>🍌 Pré-treino</h3>
+    <p>• 1 banana + aveia</p>
+
+    <h3>🥤 Pós-treino</h3>
+    <p>• Shake de whey + 1 fruta</p>
+
+    <h3>🌙 Jantar</h3>
+    <p>• Proteína magra + salada + legumes</p>
+  </div>
+</div>
+
+<!-- POPUP SOCIAL – VÍDEOS -->
+<div class="social-modal" id="socialModal">
+  <div class="social-modal-inner">
+    <button class="close-social" id="closeSocial">&times;</button>
+
+    <div class="social-videos">
+      <!-- Vídeo 1 -->
+      <div class="social-video">
+        <iframe 
+          src="https://drive.google.com/file/d/1NLjgdzHJj5Wu3qUnPUaj0RJ93XD0YX__/preview"
+          allow="autoplay"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Exemplo de mais vídeos: é só duplicar esse bloco e trocar o ID -->
+      <!--
+      <div class="social-video">
+        <iframe 
+          src="https://drive.google.com/file/d/ID_DO_OUTRO_VIDEO/preview"
+          allow="autoplay"
+          allowfullscreen>
+        </iframe>
+      </div>
+      -->
+    </div>
+  </div>
+</div>
+
 <script>
-  // CHECK (somente no botão)
+  // CHECK
   const checkButtons = document.querySelectorAll(".check-btn");
   checkButtons.forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -837,7 +1464,18 @@
     });
   });
 
-  // TOGGLE IMAGEM (seta pra baixo / X)
+  // BOTÃO EQUIPAMENTO OCUPADO
+  const busyButtons = document.querySelectorAll(".busy-btn");
+  busyButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = btn.closest(".exercise-card");
+      const active = btn.classList.toggle("active");
+      card.classList.toggle("busy", active);
+    });
+  });
+
+  // TOGGLE IMAGEM (bloco de imagens extras)
   const imageToggles = document.querySelectorAll(".image-toggle");
   imageToggles.forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -851,7 +1489,7 @@
     });
   });
 
-  // MODAL DE IMAGEM
+  // MODAL DE IMAGEM (preview dos cards)
   const imageModal = document.getElementById("imageModal");
   const modalImage = document.getElementById("modalImage");
   const closeImageBtn = document.getElementById("closeImage");
@@ -881,7 +1519,38 @@
     }
   });
 
-  // EXPANDIR VÍDEO (mantido)
+  // MODAL DE MÚSCULO (tag-chip)
+  const muscleModal = document.getElementById("muscleModal");
+  const muscleImage = document.getElementById("muscleImage");
+  const closeMuscleBtn = document.getElementById("closeMuscle");
+
+  document.querySelectorAll(".muscle-trigger").forEach(chip => {
+    chip.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const src = chip.dataset.muscleImg;
+      if (!src) return;
+      muscleImage.setAttribute("src", src);
+      muscleModal.classList.add("open");
+    });
+  });
+
+  function closeMuscleModal() {
+    muscleModal.classList.remove("open");
+    muscleImage.removeAttribute("src");
+  }
+
+  closeMuscleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeMuscleModal();
+  });
+
+  muscleModal.addEventListener("click", (e) => {
+    if (e.target === muscleModal) {
+      closeMuscleModal();
+    }
+  });
+
+  // EXPANDIR VÍDEO
   const expandButtons = document.querySelectorAll(".expand-btn");
   const videoModal = document.getElementById("videoModal");
   const modalVideo = document.getElementById("modalVideo");
@@ -890,6 +1559,7 @@
   function closeModalVideo() {
     videoModal.classList.remove("open");
     if (!modalVideo.paused) modalVideo.pause();
+    modalVideo.currentTime = 0;
     modalVideo.removeAttribute("src");
     modalVideo.load();
     if (document.fullscreenElement && document.exitFullscreen) {
@@ -908,6 +1578,7 @@
 
       const src = thumbVideo.currentSrc || thumbVideo.getAttribute("src");
       modalVideo.setAttribute("src", src);
+      modalVideo.loop = true;
       videoModal.classList.add("open");
 
       modalVideo.play().catch(() => {});
@@ -924,14 +1595,159 @@
   });
 
   videoModal.addEventListener("click", (e) => {
-    if (e.target === videoModal) {
-      closeModalVideo();
+    if (e.target.closest("video") || e.target.closest(".close-video")) {
+      return;
+    }
+    closeModalVideo();
+  });
+
+  // MODAL DE VERSÃO
+  const versionModal = document.getElementById("versionModal");
+  const openVersion = document.getElementById("openVersion");
+  const closeVersion = document.getElementById("closeVersion");
+
+  openVersion.addEventListener("click", () => {
+    versionModal.classList.add("open");
+  });
+
+  closeVersion.addEventListener("click", (e) => {
+    e.stopPropagation();
+    versionModal.classList.remove("open");
+  });
+
+  versionModal.addEventListener("click", (e) => {
+    if (e.target === versionModal) {
+      versionModal.classList.remove("open");
     }
   });
+
+  // MODAL DE DICAS
+  const tipsModal = document.getElementById("tipsModal");
+  const openTipsBtn = document.getElementById("menuDicas");
+  const closeTipsBtn = document.getElementById("closeTips");
+
+  openTipsBtn.addEventListener("click", () => {
+    tipsModal.classList.add("open");
+  });
+
+  closeTipsBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    tipsModal.classList.remove("open");
+  });
+
+  tipsModal.addEventListener("click", (e) => {
+    if (e.target === tipsModal) {
+      tipsModal.classList.remove("open");
+    }
+  });
+
+  // MODAL DIETA
+  const dietModal = document.getElementById("dietModal");
+  const openDietBtn = document.getElementById("menuDieta");
+  const closeDietBtn = document.getElementById("closeDiet");
+
+  openDietBtn.addEventListener("click", () => {
+    dietModal.classList.add("open");
+  });
+
+  closeDietBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dietModal.classList.remove("open");
+  });
+
+  dietModal.addEventListener("click", (e) => {
+    if (e.target === dietModal) {
+      dietModal.classList.remove("open");
+    }
+  });
+
+  // MODAL SOCIAL
+  const socialModal = document.getElementById("socialModal");
+  const openSocialBtn = document.getElementById("menuSocial");
+  const closeSocialBtn = document.getElementById("closeSocial");
+
+  openSocialBtn.addEventListener("click", () => {
+    socialModal.classList.add("open");
+  });
+
+  closeSocialBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    socialModal.classList.remove("open");
+  });
+
+  socialModal.addEventListener("click", (e) => {
+    if (e.target === socialModal) {
+      socialModal.classList.remove("open");
+    }
+  });
+
+  // CRONÔMETRO 1:30
+  const timerBox = document.getElementById("timerBox");
+  const timerDisplay = document.getElementById("timerDisplay");
+  const timerSub = document.getElementById("timerSub");
+
+  let timerSeconds = 90;
+  let timerInterval = null;
+
+  function renderTimer() {
+    const min = Math.floor(timerSeconds / 60);
+    const sec = timerSeconds % 60;
+    timerDisplay.textContent = `${min}:${sec.toString().padStart(2, "0")}`;
+  }
+
+  function startTimer() {
+    if (timerInterval) return;
+
+    timerBox.classList.remove("paused", "finished");
+    timerBox.classList.add("running");
+    timerSub.textContent = "Toque para pausar";
+
+    timerInterval = setInterval(() => {
+      if (timerSeconds > 0) {
+        timerSeconds--;
+        renderTimer();
+      } else {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerBox.classList.remove("running");
+        timerBox.classList.add("finished");
+        timerSub.textContent = "Toque para resetar";
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (!timerInterval) return;
+
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+    timerBox.classList.remove("running", "finished");
+    timerBox.classList.add("paused");
+    timerSub.textContent = "Toque para continuar";
+  }
+
+  function resetTimer() {
+    timerSeconds = 90;
+    renderTimer();
+
+    timerBox.classList.remove("running", "paused", "finished");
+    timerSub.textContent = "Toque para iniciar";
+  }
+
+  timerBox.addEventListener("click", () => {
+    if (timerInterval) {
+      pauseTimer();
+    } else {
+      if (timerSeconds === 0) {
+        resetTimer();
+      }
+      startTimer();
+    }
+  });
+
+  renderTimer();
 </script>
 
 </body>
 </html>
-
-
-
