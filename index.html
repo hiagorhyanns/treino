@@ -520,95 +520,6 @@
       justify-content:center;
       z-index:2;
     }
-
-    /* PLAYER SPOTIFY NA PÁGINA */
-    .spotify-section {
-      margin-top: 24px;
-      padding: 14px 10px 4px;
-      background: #101010;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.6);
-    }
-    .spotify-section h2 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-    .spotify-player {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .spotify-player iframe {
-      width: 100%;
-      height: 152px;
-      border: none;
-    }
-
-    /* LINK VERSÃO */
-    .version-link {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 13px;
-      text-decoration: underline;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    /* POPUP VERSÃO */
-    .version-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-    .version-modal.open {
-      display: flex;
-    }
-    .version-modal-inner {
-      position: relative;
-      background: #111;
-      width: 90%;
-      max-width: 400px;
-      max-height: 80vh;
-      padding: 20px;
-      border-radius: 12px;
-      color: #fff;
-      overflow-y: auto;
-      box-shadow: 0 0 20px #000;
-    }
-    .version-modal-inner h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      font-weight: 800;
-      text-align: center;
-    }
-    .version-modal-inner p {
-      font-size: 13px;
-      margin-bottom: 6px;
-      line-height: 1.4;
-    }
-    .close-version {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     /* POPUP DICAS */
     .tips-modal {
       position: fixed;
@@ -1251,26 +1162,6 @@
         </div>
       </div>
     </div>
-
-    <!-- (demais cards continuam iguais, não mexi) -->
-    <!-- ... (mantém todos os outros cards que você já tinha) ... -->
-
-    <!-- PLAYER SPOTIFY -->
-    <div class="spotify-section">
-      <h2>Playlist para o treino</h2>
-      <div class="spotify-player">
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP?utm_source=generator"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy">
-        </iframe>
-      </div>
-    </div>
-
-    <!-- LINK VERSÃO -->
-    <div class="version-link" id="openVersion">Versão 1.3</div>
-
   </section>
 </div>
 
@@ -1682,6 +1573,7 @@
 
 </body>
 </html>
+
 
 
 
